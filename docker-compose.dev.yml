@@ -1,0 +1,62 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15-alpine
+    restart: unless-stopped
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-notesdb}
+      POSTGRES_USER: ${POSTGRES_USER:-notesuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-devpassword}
+    ports:
+      - "5432:5432"   # Exposed locally for debugging only
+    networks:
+      - internal
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
+      DEBUG: "True"
+      DJANGO_SECRET_KEY: dev-secret-key-not-for-production
+      POSTGRES_DB: ${POSTGRES_DB:-notesdb}
+      POSTGRES_USER: ${POSTGRES_USER:-notesuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-devpassword}
+      POSTGRES_HOST: db
+      POSTGRES_PORT: 5432
+      ALLOWED_HOSTS: "localhost,127.0.0.1"
+      CORS_ALLOWED_ORIGINS: "http://localhost:3000,http://localhost"
+      USE_S3: "False"
+    volumes:
+      - ./backend:/app
+      - media_data:/app/media
+    ports:
+      - "8000:8000"
+    networks:
+      - internal
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        REACT_APP_API_URL: http://localhost:8000/api
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    networks:
+      - internal
+
+volumes:
+  postgres_data:
+  media_data:
+
+networks:
+  internal:
+    driver: bridge
