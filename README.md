@@ -17,30 +17,65 @@ All services run in Docker containers on a single EC2 instance. Only ports 80 an
 ## Project Structure
 
 ```
-project/
+notes-app/
+│
 ├── backend/
-│   ├── core/              # Django project settings, urls, wsgi
-│   ├── notes/             # Notes app: models, views, serializers, urls
-│   ├── requirements.txt
+│   ├── core/
+│   │   ├── __init__.py
+│   │   ├── settings.py
+│   │   ├── urls.py
+│   │   └── wsgi.py
+│   │
+│   ├── notes/
+│   │   ├── __init__.py
+│   │   ├── admin.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── serializers.py
+│   │   ├── urls.py
+│   │   └── views.py
+│   │
+│   ├── venv/                  ← local only, not in GitHub
 │   ├── Dockerfile
 │   ├── entrypoint.sh
-│   └── .env.example
+│   ├── manage.py
+│   ├── requirements.txt
+│   ├── .env                   ← local only, not in GitHub
+│   └── .env.example           ← in GitHub (fake values)
+│
 ├── frontend/
-│   ├── src/
-│   │   ├── components/    # NoteCard, NoteModal
-│   │   ├── App.js
-│   │   ├── api.js
-│   │   └── index.js
 │   ├── public/
+│   │   └── index.html
+│   │
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── NoteCard.js
+│   │   │   ├── NoteCard.css
+│   │   │   ├── NoteModal.js
+│   │   │   └── NoteModal.css
+│   │   │
+│   │   ├── App.js
+│   │   ├── App.css
+│   │   ├── api.js
+│   │   ├── index.js
+│   │   └── index.css
+│   │
+│   ├── .env                   ← local only, not in GitHub
 │   ├── Dockerfile
 │   ├── nginx.conf
 │   └── package.json
+│
 ├── nginx/
 │   ├── Dockerfile
-│   └── nginx.conf
-├── docker-compose.yml         # Production
-├── docker-compose.dev.yml     # Local development
-├── .env.example
+│   └── nginx.conf             ← SSL commented out with explanation
+│
+├── docs/
+│   └── ArchitectureDiagram.jpg  ← your architecture image
+│
+├── .env.example               ← in GitHub (fake values)
+├── .gitignore
+├── docker-compose.yml         ← production
+├── docker-compose.dev.yml     ← local development
 └── README.md
 ```
 
