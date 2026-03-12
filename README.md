@@ -70,7 +70,7 @@ notes-app/
 │   └── nginx.conf             ← SSL commented out with explanation
 │
 ├── docs/
-│   └── ArchitectureDiagram.jpg  ← your architecture image
+│   └── ArchitectureDiagram.jpg  ← architecture image
 │
 ├── .env.example               ← in GitHub (fake values)
 ├── .gitignore
