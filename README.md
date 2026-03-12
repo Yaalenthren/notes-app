@@ -6,9 +6,9 @@ A full-stack CRUD application with Django REST Framework, React, PostgreSQL, and
 
 ## Architecture
 
-```
-docs/ArchitectureDiagramforNotesapp.jpg
-```
+
+![Architecture Diagram](docs/ArchitectureDiagramforNotesapp.jpg)
+
 
 All services run in Docker containers on a single EC2 instance. Only ports 80 and 443 are publicly exposed. PostgreSQL is on an internal Docker network only.
 
