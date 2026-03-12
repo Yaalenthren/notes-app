@@ -7,21 +7,7 @@ A full-stack CRUD application with Django REST Framework, React, PostgreSQL, and
 ## Architecture
 
 ```
-Internet
-   │
-   ▼
-[Security Group: 80/443 only]
-   │
-[EC2 Instance]
-   │
-[Nginx Reverse Proxy :80/:443]
-   ├──► /api/*  ──► [Django Backend :8000]
-   │                      │
-   │               [PostgreSQL :5432]  (internal only)
-   │
-   └──► /*      ──► [React Frontend :80]
-                          │
-                    [AWS S3 Bucket]  (file uploads)
+doc/Architecture Diagram for Notes app.jpg
 ```
 
 All services run in Docker containers on a single EC2 instance. Only ports 80 and 443 are publicly exposed. PostgreSQL is on an internal Docker network only.
