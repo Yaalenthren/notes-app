@@ -243,7 +243,7 @@ docker compose logs -f
 
 | Service       | Free Tier Limit           | Usage in this project         |
 |---------------|---------------------------|-------------------------------|
-| EC2 t2.micro  | 750 hrs/month             | 1 instance = ~744 hrs/month ✓ |
+| EC2 t3.micro  | 750 hrs/month             | 1 instance = ~744 hrs/month ✓ |
 | S3            | 5 GB storage, 20K GET     | File uploads only ✓           |
 | Data transfer | 1 GB out/month free       | Light usage ✓                 |
 | RDS           | 750 hrs t3.micro/month    | Optional, use containerized DB|
